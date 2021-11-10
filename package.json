@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "lint": "npm run lint:js && npm run lint:style",
     "test:e2e": "nightwatch",
-    "fuck_modules": "rm -rf node_modules && rm -f package-lock.json && npm i"
+    "fuck_modules": "rm -rf node_modules && rm -f package-lock.json && npm i",
+    "heroku-postbuild": "npm run build"
   },
   "engines": {
     "node": "v16.x"
