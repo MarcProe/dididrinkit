@@ -15,6 +15,9 @@
     "test:e2e": "nightwatch",
     "fuck_modules": "rm -rf node_modules && rm -f package-lock.json && npm i"
   },
+  "engines": {
+    "node": "v16.x"
+  },
   "lint-staged": {
     "*.{js,vue}": "eslint",
     "*.{css,vue}": "stylelint"
