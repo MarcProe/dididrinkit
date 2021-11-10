@@ -70,4 +70,9 @@ export default {
   },
 
   serverMiddleware: ['~/serverMiddleware/auth', '~/serverMiddleware/authredir'],
+
+  server: {
+    host: '0',
+    port: process.env.PORT,
+  },
 }
