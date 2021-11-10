@@ -64,6 +64,9 @@ export default {
         fs: 'empty',
       }
     },
+    babel: {
+      compact: true,
+    },
   },
 
   serverMiddleware: ['~/serverMiddleware/auth', '~/serverMiddleware/authredir'],
