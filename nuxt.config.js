@@ -30,8 +30,6 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    // https://nuxtjs.org/tutorials/going-dark-with-nuxtjs-color-mode/
-    '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -44,6 +42,8 @@ export default {
     '@nuxtjs/pwa',
     // https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
+    // https://nuxtjs.org/tutorials/going-dark-with-nuxtjs-color-mode/
+    '@nuxtjs/color-mode',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
