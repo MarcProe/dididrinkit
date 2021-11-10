@@ -1,0 +1,60 @@
+<template>
+  <b-list-group id="beerlist">
+    <b-container v-for="b in beers" :key="b.id" fluid>
+      <b-row>
+        <b-col cols="3">
+          <b-img-lazy
+            v-b-tooltip.hover
+            fluid
+            rounded
+            style="max-height: 100px"
+            :alt="b.beer"
+            :src="b.label"
+            :title="b.slug"
+          />
+        </b-col>
+        <b-col
+          ><b-row class="" style="font-size: x-large"> {{ b.beer }}</b-row
+          ><b-row class="font-weight-bold">
+            {{ b.brewery }}
+          </b-row>
+        </b-col>
+        <b-col
+          class="text-center font-weight-bold"
+          cols="2"
+          style="font-size: xx-large"
+        >
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <span v-html="computeRating(b.score)" />
+        </b-col>
+      </b-row>
+    </b-container>
+  </b-list-group>
+</template>
+
+<script>
+export default {
+  props: {
+    beers: {
+      type: Array,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      fracs: {
+        0: '<small><b>0</b></small>',
+        0.25: '&frac14;',
+        0.5: '&half;',
+        0.75: '&frac34;',
+      },
+    }
+  },
+
+  methods: {
+    computeRating(r) {
+      return Math.floor(r) + '<sup>' + this.fracs[r % 1] + '</sup>'
+    },
+  },
+}
+</script>
