@@ -52,7 +52,7 @@ export default {
 
     if (!this.$store.state.user) {
       if (this.$store.state.access_token) {
-        this.getUserInfo().then((r) => {
+        this.$store.dispatch('getUserInfo').then((r) => {
           if (r.ok) {
             localStorage.setItem('user', JSON.stringify(this.$store.state.user))
           } else {
@@ -64,7 +64,7 @@ export default {
       if (!this.$store.state.beers) {
         this.$store.commit('set_beers', [])
         if (this.$store.state.access_token) {
-          this.getUserBeers().then((r) => {
+          this.$store.dispatch('getUserBeers').then((r) => {
             if (r.ok) {
               this.shown = this.$store.state.beers.length
               localStorage.setItem(
@@ -114,14 +114,6 @@ export default {
       localStorage.removeItem('user')
       localStorage.removeItem('meta')
       window.location.href = '/authredir'
-    },
-    async getUserInfo(token) {
-      const res = await this.$store.dispatch('getUserInfo')
-      return res
-    },
-    async getUserBeers(token) {
-      const res = await this.$store.dispatch('getUserBeers')
-      return res
     },
   },
 }
