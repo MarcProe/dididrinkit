@@ -55,6 +55,8 @@ export default {
         this.getUserInfo().then((r) => {
           if (r.ok) {
             localStorage.setItem('user', JSON.stringify(this.$store.state.user))
+          } else {
+            console.log(this.$store.state.error)
           }
         })
       }
