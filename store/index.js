@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export const state = () => ({
   access_token: null,
   beers: null,
@@ -85,7 +83,7 @@ export const actions = {
       }
     }
     if (!e) {
-      commit('set_beers', Vue.prototype.$filterdata(beers))
+      commit('set_beers', filterdata(beers))
       commit('set_meta', meta)
       return { ok: true }
     } else {
@@ -105,4 +103,22 @@ function handle(error) {
     e.message = error.message
   }
   return e
+}
+
+function filterdata(data) {
+  const retval = []
+
+  data.forEach((e) => {
+    const el = {
+      id: e.first_checkin_id,
+      beer: e.beer.beer_name,
+      brewery: e.brewery.brewery_name,
+      slug: e.beer.beer_slug,
+      score: e.rating_score,
+      label: e.beer.beer_label,
+    }
+    retval.push(el)
+  })
+
+  return retval
 }
