@@ -16,7 +16,11 @@
         }}</b-col>
         <b-col cols="3">
           <b-avatar
-            :src="user && user.user_avatar ? user.user_avatar : ''"
+            :src="
+              $store.state.user && $store.state.user.user_avatar
+                ? $store.state.user.user_avatar
+                : ''
+            "
             fluid
             button
             @click="sync"
@@ -36,7 +40,6 @@ export default {
     return {
       beers: [],
       meta: {},
-      user: {},
       obeers: [],
       shown: 0,
       text: '',
@@ -46,15 +49,14 @@ export default {
     this.focusSearch()
 
     this.obeers = JSON.parse(localStorage.getItem('beers'))
-    this.user = JSON.parse(localStorage.getItem('user'))
+    this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
     this.meta = JSON.parse(localStorage.getItem('meta'))
 
-    if (!this.user) {
+    if (!this.$store.state.user) {
       if (this.$store.state.access_token) {
         this.getUserInfo().then((r) => {
           if (r.ok) {
             localStorage.setItem('user', JSON.stringify(this.$store.state.user))
-            this.user = this.$store.state.user
           }
         })
       }
