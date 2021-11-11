@@ -15,12 +15,7 @@
           shown
         }}</b-col>
         <b-col cols="3">
-          <b-avatar
-            :src="user && user.user_avatar ? user.user_avatar : ''"
-            fluid
-            button
-            @click="load"
-          >
+          <b-avatar :src="user.user_avatar" fluid button @click="load">
           </b-avatar
         ></b-col>
       </b-row>
@@ -47,7 +42,6 @@ export default {
     // this.obeers = this.$filterdata(this.$testdata())
     this.obeers = JSON.parse(localStorage.getItem('beers'))
     this.user = JSON.parse(localStorage.getItem('user'))
-    console.log(this.obeers)
     if (!this.obeers) {
       // TODO: LOAD USER SEPERATELY
       this.obeers = []
@@ -55,8 +49,6 @@ export default {
       this.storeList(this.obeers)
       // load if we have a token, as the stored beers might be old data
       if (this.$store.state.access_token) {
-        console.log('My Token ' + this.$store.state.access_token)
-
         this.getUserInfo().then((r) => {
           if (r.ok) {
             console.log('info:', r)
