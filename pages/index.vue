@@ -39,7 +39,6 @@ export default {
   data() {
     return {
       beers: [],
-      meta: {},
       shown: 0,
       text: '',
     }
@@ -62,7 +61,6 @@ export default {
 
       if (!this.$store.state.beers) {
         this.$store.commit('set_beers', [])
-        // load if we have a token, as the stored beers might be old data
         if (this.$store.state.access_token) {
           this.getUserBeers().then((r) => {
             if (r.ok) {
@@ -75,7 +73,12 @@ export default {
                 'beers',
                 JSON.stringify(this.$store.state.beers)
               )
-              localStorage.setItem('meta', JSON.stringify(this.meta))
+              localStorage.setItem(
+                'meta',
+                JSON.stringify(this.$store.state.meta)
+              )
+            } else {
+              console.log(this.$store.state.error)
             }
           })
         }
