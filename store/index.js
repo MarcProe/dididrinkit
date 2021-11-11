@@ -7,8 +7,8 @@ export const state = () => ({
 })
 
 export const mutations = {
-  set_token(state, value) {
-    state.access_token = value
+  set_token(state, token) {
+    state.access_token = token
   },
   set_beers(state, beers) {
     state.beers = beers
