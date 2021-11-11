@@ -49,17 +49,12 @@ export default {
     this.user = JSON.parse(localStorage.getItem('user'))
     this.meta = JSON.parse(localStorage.getItem('meta'))
 
-    console.log(this.obeers)
-
     if (!this.user) {
       if (this.$store.state.access_token) {
         this.getUserInfo().then((r) => {
-          console.log('info:', r)
           if (r.ok) {
-            console.log(this.$store.state.user)
             localStorage.setItem('user', JSON.stringify(this.$store.state.user))
             this.user = this.$store.state.user
-            // TODO: Try to set avatar src from here
           }
         })
       }
@@ -69,11 +64,7 @@ export default {
         // load if we have a token, as the stored beers might be old data
         if (this.$store.state.access_token) {
           this.getUserBeers().then((r) => {
-            console.log('info:', r)
             if (r.ok) {
-              console.log(this.$store.state.beers)
-              console.log(this.$store.state.meta)
-
               this.obeers = this.$filterdata(this.$store.state.beers)
               this.shown = this.obeers.length
               localStorage.setItem(
@@ -82,7 +73,6 @@ export default {
               )
               localStorage.setItem('beers', JSON.stringify(this.obeers))
               localStorage.setItem('meta', JSON.stringify(this.meta))
-              // this.beers = this.obeers
             }
           })
         }
@@ -103,7 +93,6 @@ export default {
           return o.slug.includes(text)
         })
         this.shown = this.beers.length
-        // console.log(this.beers)
       } else {
         this.beers = []
         this.shown = this.obeers.length
