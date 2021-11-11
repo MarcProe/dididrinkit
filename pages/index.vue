@@ -40,7 +40,6 @@ export default {
     return {
       beers: [],
       meta: {},
-      obeers: [],
       shown: 0,
       text: '',
     }
@@ -48,9 +47,9 @@ export default {
   mounted() {
     this.focusSearch()
 
-    this.obeers = JSON.parse(localStorage.getItem('beers'))
+    this.$store.commit('set_beers', JSON.parse(localStorage.getItem('beers')))
     this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
-    this.meta = JSON.parse(localStorage.getItem('meta'))
+    this.$store.commit('set_meta', JSON.parse(localStorage.getItem('meta')))
 
     if (!this.$store.state.user) {
       if (this.$store.state.access_token) {
@@ -61,25 +60,27 @@ export default {
         })
       }
 
-      if (!this.obeers) {
-        this.obeers = []
+      if (!this.$store.state.beers) {
+        this.$store.commit('set_beers', [])
         // load if we have a token, as the stored beers might be old data
         if (this.$store.state.access_token) {
           this.getUserBeers().then((r) => {
             if (r.ok) {
-              this.obeers = this.$filterdata(this.$store.state.beers)
-              this.shown = this.obeers.length
+              this.shown = this.$store.state.beers.length
               localStorage.setItem(
                 'beerstimestamp',
                 new Date().toLocaleString()
               )
-              localStorage.setItem('beers', JSON.stringify(this.obeers))
+              localStorage.setItem(
+                'beers',
+                JSON.stringify(this.$store.state.beers)
+              )
               localStorage.setItem('meta', JSON.stringify(this.meta))
             }
           })
         }
       }
-    } else this.shown = this.obeers.length
+    } else this.shown = this.$store.state.beers.length
   },
   methods: {
     sanitizeInput(value) {
@@ -91,13 +92,13 @@ export default {
     },
     beerinput(text) {
       if (text.length > 1) {
-        this.beers = _.filter(this.obeers, (o) => {
+        this.beers = _.filter(this.$store.state.beers, (o) => {
           return o.slug.includes(text)
         })
         this.shown = this.beers.length
       } else {
         this.beers = []
-        this.shown = this.obeers.length
+        this.shown = this.$store.state.beers.length
       }
     },
     focusSearch() {

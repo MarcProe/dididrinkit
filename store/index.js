@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   access_token: null,
   beers: null,
@@ -83,7 +85,7 @@ export const actions = {
       }
     }
     if (!e) {
-      commit('set_beers', beers)
+      commit('set_beers', Vue.prototype.$filterdata(beers))
       commit('set_meta', meta)
       return { ok: true }
     } else {
