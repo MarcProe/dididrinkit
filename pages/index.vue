@@ -30,7 +30,9 @@ export default {
   data() {
     return {
       beers: [],
-      user: {},
+      user: {
+        user_avatar: '',
+      },
       obeers: [],
       shown: 0,
       text: '',
