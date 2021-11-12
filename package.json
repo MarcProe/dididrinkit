@@ -6,6 +6,7 @@
     "dev": "nuxt",
     "dev:host": "nuxt --hostname '0' --port 3000",
     "heroku:logs": "heroku logs --tail",
+    "git:push-heroku-master": "git push heroku master",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
