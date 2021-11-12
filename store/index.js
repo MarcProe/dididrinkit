@@ -1,4 +1,5 @@
-import _ from 'lodash'
+// import _ from 'lodash'
+import { filter } from 'lodash-es'
 export const state = () => ({
   access_token: null,
   beers: null,
@@ -61,7 +62,7 @@ export const actions = {
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {
-      const filtered = _.filter(getters.get_beers, (o) => {
+      const filtered = filter(getters.get_beers, (o) => {
         return o.slug.includes(text)
       })
       commit('set_filtered', filtered)
