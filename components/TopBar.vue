@@ -10,9 +10,9 @@
           @input="beerinput"
         />
       </b-col>
-      <b-col cols="3" class="text-center" style="font-size: x-large">{{
-        shown
-      }}</b-col>
+      <b-col cols="3" class="text-center" style="font-size: x-large">
+        {{ shown }}
+      </b-col>
       <b-col cols="3">
         <b-avatar :src="avatar" fluid button @click="sync"> </b-avatar
       ></b-col>
@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       text: '',
-      shown: 0, // TODO
     }
   },
   computed: {
@@ -34,6 +33,11 @@ export default {
       return this.$store.state.user && this.$store.state.user.user_avatar
         ? this.$store.state.user.user_avatar
         : null
+    },
+    shown() {
+      return this.$store.state.filtered && this.$store.state.filtered.length > 0
+        ? this.$store.state.filtered.length
+        : this.$store.state.beers.length
     },
   },
   methods: {

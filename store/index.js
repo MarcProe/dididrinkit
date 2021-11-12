@@ -56,6 +56,9 @@ export const getters = {
   get_meta(state) {
     return state.meta
   },
+  get_shown(state) {
+    return state.filtered.length
+  },
 }
 
 export const actions = {
@@ -66,10 +69,8 @@ export const actions = {
         return o.slug.includes(text)
       })
       commit('set_filtered', filtered)
-      // TODO: this.shown = this.beers.length
     } else {
       commit('set_filtered', [])
-      // TODO: this.shown = this.$store.state.beers.length
     }
   },
   async getUserInfo({ commit, getters }) {
