@@ -1,6 +1,6 @@
 <template>
   <b-list-group id="beerlist">
-    <b-container v-for="b in beers" :key="b.id" fluid>
+    <b-container v-for="b in $store.state.filtered" :key="b.id" fluid>
       <b-row>
         <b-col cols="3">
           <b-img-lazy
@@ -34,12 +34,6 @@
 
 <script>
 export default {
-  props: {
-    beers: {
-      type: Array,
-      default: null,
-    },
-  },
   data() {
     return {
       fracs: {

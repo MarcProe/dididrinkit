@@ -1,6 +1,9 @@
+import _ from 'lodash'
 export const state = () => ({
   access_token: null,
   beers: null,
+  filtered: [],
+  text: '',
   user: null,
   error: null,
   meta: null,
@@ -12,6 +15,9 @@ export const mutations = {
   },
   set_beers(state, beers) {
     state.beers = beers
+  },
+  set_text(state, text) {
+    state.text = text
   },
   set_user(state, user) {
     state.user = user
@@ -31,6 +37,12 @@ export const getters = {
   get_beers(state) {
     return state.beers
   },
+  get_filtered(state) {
+    return state.filtered
+  },
+  get_text(state) {
+    return state.text
+  },
   get_user(state) {
     return state.user
   },
@@ -43,6 +55,19 @@ export const getters = {
 }
 
 export const actions = {
+  filterList({ commit, getters }) {
+    const text = getters.get_text
+    if (text.length > 1) {
+      const filtered = _.filter(this.$store.state.beers, (o) => {
+        return o.slug.includes(text)
+      })
+      commit('set_filtered', filtered)
+      // TODO: this.shown = this.beers.length
+    } else {
+      commit('set_filtered', [])
+      // TODO: this.shown = this.$store.state.beers.length
+    }
+  },
   async getUserInfo({ commit, getters }) {
     const url = `https://api.untappd.com/v4/user/info/?access_token=${getters.get_access_token}&compact=true`
     let e = null
