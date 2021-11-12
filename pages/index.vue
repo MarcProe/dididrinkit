@@ -15,17 +15,7 @@
           shown
         }}</b-col>
         <b-col cols="3">
-          <b-avatar
-            :src="
-              $store.state.user && $store.state.user.user_avatar
-                ? $store.state.user.user_avatar
-                : ''
-            "
-            fluid
-            button
-            @click="sync"
-          >
-          </b-avatar
+          <b-avatar :src="avatar" fluid button @click="sync"> </b-avatar
         ></b-col>
       </b-row>
     </b-container>
@@ -42,6 +32,13 @@ export default {
       shown: 0,
       text: '',
     }
+  },
+  computed: {
+    avatar() {
+      return this.$store.state.user && this.$store.state.user.user_avatar
+        ? this.$store.state.user.user_avatar
+        : null
+    },
   },
   mounted() {
     this.focusSearch()
