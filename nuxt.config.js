@@ -54,6 +54,9 @@ export default {
     manifest: {
       lang: 'en',
     },
+    meta: {
+      name: 'Did I Drink It?',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
