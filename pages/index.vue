@@ -2,6 +2,7 @@
   <div>
     <TopBar />
     <BeerList />
+    <Credits />
   </div>
 </template>
 
@@ -13,10 +14,7 @@ export default {
       shown: 0,
     }
   },
-
   mounted() {
-    // TODO: this.focusSearch()
-
     this.$store.commit('set_beers', JSON.parse(localStorage.getItem('beers')))
     this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
     this.$store.commit('set_meta', JSON.parse(localStorage.getItem('meta')))
@@ -58,6 +56,5 @@ export default {
       }
     } else this.shown = this.$store.state.beers.length
   },
-  methods: {},
 }
 </script>
