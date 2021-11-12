@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Bitte warten</h1>
+    <div class="d-flex justify-content-center mb-3">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
   </div>
 </template>
 

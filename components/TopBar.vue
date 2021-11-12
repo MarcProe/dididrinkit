@@ -14,34 +14,35 @@
         {{ shown }}
       </b-col>
       <b-col cols="3">
-        <b-avatar :src="avatar" fluid button @click="sync"> </b-avatar
-      ></b-col>
+        <b-avatar :src="avatar" fluid button @click="sync" />
+      </b-col>
     </b-row>
   </b-container>
 </template>
  
  <script>
-// import _ from 'lodash'
+import { get } from 'lodash-es'
+
 export default {
   data() {
     return {
       text: '',
     }
   },
+
   computed: {
     avatar() {
-      return this.$store.state.user && this.$store.state.user.user_avatar
-        ? this.$store.state.user.user_avatar
-        : null
+      return get(this.$store, 'state.user.user_avatar')
     },
     shown() {
-      return this.$store.state.filtered && this.$store.state.filtered.length > 0
-        ? this.$store.state.filtered.length
+      return get(this.$store, 'state.filtered.length') > 0
+        ? get(this.$store, 'state.filtered.length')
         : this.$store.state.beers
         ? this.$store.state.beers.length
         : 0
     },
   },
+
   methods: {
     beerinput(text) {
       this.$store.commit('set_text', text)

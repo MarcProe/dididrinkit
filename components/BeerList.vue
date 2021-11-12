@@ -13,11 +13,9 @@
             :title="b.slug"
           />
         </b-col>
-        <b-col
-          ><b-row class="" style="font-size: x-large"> {{ b.beer }}</b-row
-          ><b-row class="font-weight-bold">
-            {{ b.brewery }}
-          </b-row>
+        <b-col>
+          <b-row class="" style="font-size: x-large"> {{ b.beer }} </b-row>
+          <b-row class="font-weight-bold">{{ b.brewery }} </b-row>
         </b-col>
         <b-col
           class="text-center font-weight-bold"
@@ -47,7 +45,7 @@ export default {
 
   methods: {
     computeRating(r) {
-      return Math.floor(r) + '<sup>' + this.fracs[r % 1] + '</sup>'
+      return `${Math.floor(r)}'<sup>${this.fracs[r % 1]}</sup>`
     },
   },
 }

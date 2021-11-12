@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { get } from 'lodash-es'
+
 export default {
   data() {
     return {
@@ -14,6 +16,7 @@ export default {
       shown: 0,
     }
   },
+
   mounted() {
     this.$store.commit('set_beers', JSON.parse(localStorage.getItem('beers')))
     this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
@@ -25,7 +28,7 @@ export default {
           if (r.ok) {
             localStorage.setItem('user', JSON.stringify(this.$store.state.user))
           } else {
-            console.log(this.$store.state.error)
+            window.console.log(this.$store.state.error)
           }
         })
       }
@@ -35,7 +38,7 @@ export default {
         if (this.$store.state.access_token) {
           this.$store.dispatch('getUserBeers').then((r) => {
             if (r.ok) {
-              this.shown = this.$store.state.beers.length
+              this.shown = get(this.$store, 'state.beers.length')
               localStorage.setItem(
                 'beerstimestamp',
                 new Date().toLocaleString()
@@ -49,12 +52,12 @@ export default {
                 JSON.stringify(this.$store.state.meta)
               )
             } else {
-              console.log(this.$store.state.error)
+              window.console.log(this.$store.state.error)
             }
           })
         }
       }
-    } else this.shown = this.$store.state.beers.length
+    } else this.shown = get(this.$store, 'state.beers.length')
   },
 }
 </script>

@@ -1,5 +1,5 @@
-// import _ from 'lodash'
-import { filter } from 'lodash-es'
+import { filter, get } from 'lodash-es'
+
 export const state = () => ({
   access_token: null,
   beers: null,
@@ -57,7 +57,7 @@ export const getters = {
     return state.meta
   },
   get_shown(state) {
-    return state.filtered.length
+    return get(state, 'filtered.length')
   },
 }
 
@@ -80,7 +80,7 @@ export const actions = {
       e = handle(error)
     })
     if (!e) {
-      commit('set_user', res.data.response.user)
+      commit('set_user', get(res, 'data.response.user'))
       return { ok: true }
     } else {
       commit('set_error', e)
@@ -103,9 +103,9 @@ export const actions = {
           e = handle(error)
         })
       if (!e) {
-        count += res.data.response.beers.count
-        totalcount = res.data.response.total_count
-        beers = beers.concat(res.data.response.beers.items)
+        count += get(res, 'data.response.beers.count')
+        totalcount = get(res, 'data.response.total_count')
+        beers = beers.concat(get(res, 'data.response.beers.items'))
         if (!meta) {
           meta = res.data.response
           delete meta.beers
@@ -141,11 +141,11 @@ function filterdata(data) {
   data.forEach((e) => {
     const el = {
       id: e.first_checkin_id,
-      beer: e.beer.beer_name,
-      brewery: e.brewery.brewery_name,
-      slug: e.beer.beer_slug,
+      beer: get(e, 'beer.beer_name'),
+      label: get(e, 'beer.beer_label'),
+      slug: get(e, 'beer.beer_slug'),
+      brewery: get(e, 'brewery.brewery_name'),
       score: e.rating_score,
-      label: e.beer.beer_label,
     }
     retval.push(el)
   })

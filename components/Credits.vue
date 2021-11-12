@@ -15,7 +15,7 @@
       :max="dismissSecs"
       :value="dismissCountDown"
       height="4px"
-    ></b-progress>
+    />
   </b-alert>
 </template>
 
@@ -27,9 +27,11 @@ export default {
       dismissCountDown: 0,
     }
   },
+
   mounted() {
     this.dismissCountDown = this.dismissSecs
   },
+
   methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown

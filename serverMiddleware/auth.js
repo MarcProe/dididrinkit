@@ -1,9 +1,6 @@
 export default {
   path: '/auth',
   handler(req, res) {
-    // Receives http://REDIRECT_URL?code=CODE
-    // GET https://untappd.com/oauth/authorize/?client_id=CLIENTID&client_secret=CLIENTSECRET&response_type=code&redirect_url=REDIRECT_URL&code=CODE
-    // redirect to app with access token
     const pUrl = require('url')
     const https = require('https')
     // eslint-disable-next-line node/no-deprecated-api
@@ -36,17 +33,17 @@ export default {
               res.end()
             } else {
               // TODO: redirect to error page
-              console.error(json)
+              window.console.error(json)
             }
           } catch (error) {
             // TODO: redirect to error page
-            console.error(error.message)
+            window.console.error(error.message)
           }
         })
       })
       .on('error', (error) => {
         // TODO: redirect to error page
-        console.error(error.message)
+        window.console.error(error.message)
       })
   },
 }
