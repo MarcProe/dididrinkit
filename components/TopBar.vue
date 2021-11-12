@@ -37,7 +37,9 @@ export default {
     shown() {
       return this.$store.state.filtered && this.$store.state.filtered.length > 0
         ? this.$store.state.filtered.length
-        : this.$store.state.beers.length
+        : this.$store.state.beers
+        ? this.$store.state.beers.length
+        : 0
     },
   },
   methods: {
