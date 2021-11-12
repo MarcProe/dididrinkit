@@ -16,6 +16,9 @@ export const mutations = {
   set_beers(state, beers) {
     state.beers = beers
   },
+  set_filtered(state, filtered) {
+    state.filtered = filtered
+  },
   set_text(state, text) {
     state.text = text
   },
@@ -58,7 +61,7 @@ export const actions = {
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {
-      const filtered = _.filter(this.$store.state.beers, (o) => {
+      const filtered = _.filter(getters.get_beers, (o) => {
         return o.slug.includes(text)
       })
       commit('set_filtered', filtered)
