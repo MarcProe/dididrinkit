@@ -165,7 +165,8 @@ function filterdata(data, m = 'beers') {
 
   data.forEach((e) => {
     const el = {
-      id: e.first_checkin_id,
+      // id: m === 'beers' ? e.first_checkin_id : get(e, 'beer.bid'),
+      id: get(e, 'beer.bid'),
       beer: get(e, 'beer.beer_name'),
       label: get(e, 'beer.beer_label'),
       slug: get(e, 'beer.beer_slug'),
