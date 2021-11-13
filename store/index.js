@@ -48,6 +48,9 @@ export const getters = {
   get_beers(state) {
     return state.beers
   },
+  get_wishlist(state) {
+    return state.wishlist
+  },
   get_filtered(state) {
     return state.filtered
   },
@@ -75,6 +78,14 @@ export const actions = {
       const filtered = filter(getters.get_beers, (o) => {
         return o.slug.includes(text)
       })
+
+      if (getters.get_wishlist) {
+        filtered.concat(
+          filter(getters.get_wishlist, (o) => {
+            return o.slug.includes(text)
+          })
+        )
+      }
       commit('set_filtered', filtered)
     } else {
       commit('set_filtered', [])
@@ -159,7 +170,7 @@ function filterdata(data, m = 'beers') {
       slug: get(e, 'beer.beer_slug'),
       brewery: get(e, 'brewery.brewery_name'),
       score: e.rating_score,
-      method: m,
+      list: m,
     }
     retval.push(el)
   })
