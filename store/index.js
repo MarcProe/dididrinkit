@@ -91,7 +91,7 @@ export const actions = {
         const wfiltered = getters.get_wishlist.filter((o) =>
           o.slug.includes(text)
         )
-        commit('set_wshown', filtered.length)
+        commit('set_wshown', wfiltered.length)
         filtered = wfiltered.concat(filtered)
       }
       commit('set_filtered', filtered)
