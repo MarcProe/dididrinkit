@@ -87,6 +87,7 @@ export const actions = {
         )
       }
       commit('set_filtered', filtered)
+      console.log(filtered)
     } else {
       commit('set_filtered', [])
     }
