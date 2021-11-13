@@ -46,7 +46,7 @@ export default {
   methods: {
     computeRating(r) {
       if (r) {
-        return `${Math.floor(r)}'<sup>${this.fracs[r % 1]}</sup>`
+        return `${Math.floor(r)}<sup>${this.fracs[r % 1]}</sup>`
       } else {
         return ''
       }
