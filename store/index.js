@@ -88,8 +88,10 @@ export const actions = {
     }
   },
   async getUserBeers({ commit, getters }) {
-    const beers = await getUserList(this, commit, getters, 'beers')
-    const wishlist = await getUserList(this, commit, getters, 'wishlist')
+    const beers = await getUserList(this.$axios, commit, getters, 'beers')
+    const wishlist = await getUserList(this.$axios, commit, getters, 'wishlist')
+    console.log(beers)
+    console.log(wishlist)
     const ret =
       Array.isArray(beers) && Array.isArray(wishlist)
         ? beers.concat(wishlist)
@@ -98,7 +100,7 @@ export const actions = {
   },
 }
 
-async function getUserList(that, commit, getters, m = 'beers') {
+async function getUserList(axios, commit, getters, m = 'beers') {
   const url = `https://api.untappd.com/v4/user/${m}/?access_token=${getters.get_access_token}&limit=50`
   let beers = []
   let meta = null
@@ -108,11 +110,9 @@ async function getUserList(that, commit, getters, m = 'beers') {
   let e = null
   while (count < totalcount && br < 5 && !e) {
     br++
-    const res = await that.$axios
-      .get(`${url}&offset=${count}`)
-      .catch((error) => {
-        e = handle(error)
-      })
+    const res = await axios.get(`${url}&offset=${count}`).catch((error) => {
+      e = handle(error)
+    })
     if (!e) {
       count += get(res, 'data.response.beers.count')
       totalcount = get(res, 'data.response.total_count')
