@@ -53,6 +53,7 @@ export default {
     },
     sync() {
       localStorage.removeItem('beers')
+      localStorage.removeItem('wishlist')
       localStorage.removeItem('user')
       localStorage.removeItem('meta')
       window.location.href = '/authredir'

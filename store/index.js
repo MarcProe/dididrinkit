@@ -130,7 +130,7 @@ async function getUserList(axios, commit, getters, m = 'beers') {
       count += get(res, 'data.response.beers.count')
       totalcount = get(res, 'data.response.total_count')
       beers = beers.concat(get(res, 'data.response.beers.items'))
-      if (!meta) {
+      if (!meta && m === 'beers') {
         meta = res.data.response
         delete meta.beers
       }
@@ -139,7 +139,7 @@ async function getUserList(axios, commit, getters, m = 'beers') {
   if (!e) {
     const liststore = `set_${m}`
     commit(liststore, filterdata(beers, m))
-    commit('set_meta', meta)
+    if (m === 'beers') commit('set_meta', meta)
     return { ok: true }
   } else {
     commit('set_error', e)

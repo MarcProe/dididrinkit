@@ -19,6 +19,10 @@ export default {
 
   mounted() {
     this.$store.commit('set_beers', JSON.parse(localStorage.getItem('beers')))
+    this.$store.commit(
+      'set_wishlist',
+      JSON.parse(localStorage.getItem('wishlist'))
+    )
     this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
     this.$store.commit('set_meta', JSON.parse(localStorage.getItem('meta')))
 
