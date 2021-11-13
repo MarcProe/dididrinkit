@@ -58,6 +58,8 @@ export default {
         }
       }
     } else this.shown = get(this.$store, 'state.beers.length')
+    console.log(get(this.$store, 'state.beers'))
+    console.log(get(this.$store, 'state.beers.length'))
   },
 }
 </script>

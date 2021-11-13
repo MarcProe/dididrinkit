@@ -88,39 +88,50 @@ export const actions = {
     }
   },
   async getUserBeers({ commit, getters }) {
-    const url = `https://api.untappd.com/v4/user/beers/?access_token=${getters.get_access_token}&limit=50`
-    let beers = []
-    let meta = null
-    let count = 0
-    let totalcount = 999999
-    let br = 0
-    let e = null
-    while (count < totalcount && br < 5 && !e) {
-      br++
-      const res = await this.$axios
-        .get(`${url}&offset=${count}`)
-        .catch((error) => {
-          e = handle(error)
-        })
-      if (!e) {
-        count += get(res, 'data.response.beers.count')
-        totalcount = get(res, 'data.response.total_count')
-        beers = beers.concat(get(res, 'data.response.beers.items'))
-        if (!meta) {
-          meta = res.data.response
-          delete meta.beers
-        }
+    const beers = await getUserList(commit, getters, 'beers')
+    const wishlist = await getUserList(commit, getters, 'wishlist')
+    const ret =
+      Array.isArray(beers) && Array.isArray(wishlist)
+        ? beers.concat(wishlist)
+        : []
+    return ret
+  },
+}
+
+async function getUserList(commit, getters, m = 'beers') {
+  const url = `https://api.untappd.com/v4/user/${m}/?access_token=${getters.get_access_token}&limit=50`
+  let beers = []
+  let meta = null
+  let count = 0
+  let totalcount = 999999
+  let br = 0
+  let e = null
+  while (count < totalcount && br < 5 && !e) {
+    br++
+    const res = await this.$axios
+      .get(`${url}&offset=${count}`)
+      .catch((error) => {
+        e = handle(error)
+      })
+    if (!e) {
+      count += get(res, 'data.response.beers.count')
+      totalcount = get(res, 'data.response.total_count')
+      beers = beers.concat(get(res, 'data.response.beers.items'))
+      if (!meta) {
+        meta = res.data.response
+        delete meta.beers
       }
     }
-    if (!e) {
-      commit('set_beers', filterdata(beers))
-      commit('set_meta', meta)
-      return { ok: true }
-    } else {
-      commit('set_error', e)
-      return { ok: false }
-    }
-  },
+  }
+  if (!e) {
+    const liststore = `set_${m}`
+    commit(liststore, filterdata(beers, m))
+    commit('set_meta', meta)
+    return { ok: true }
+  } else {
+    commit('set_error', e)
+    return { ok: false }
+  }
 }
 
 function handle(error) {
@@ -135,7 +146,7 @@ function handle(error) {
   return e
 }
 
-function filterdata(data) {
+function filterdata(data, m = 'beers') {
   const retval = []
 
   data.forEach((e) => {
@@ -146,6 +157,7 @@ function filterdata(data) {
       slug: get(e, 'beer.beer_slug'),
       brewery: get(e, 'brewery.brewery_name'),
       score: e.rating_score,
+      method: m,
     }
     retval.push(el)
   })
