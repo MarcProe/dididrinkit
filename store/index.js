@@ -80,11 +80,10 @@ export const actions = {
       })
 
       if (getters.get_wishlist) {
-        filtered.concat(
-          filter(getters.get_wishlist, (o) => {
-            return o.slug.includes(text)
-          })
-        )
+        const wishfiltered = filter(getters.get_wishlist, (o) => {
+          return o.slug.includes(text)
+        })
+        filtered.concat(wishfiltered)
       }
       commit('set_filtered', filtered)
       console.log(filtered)
