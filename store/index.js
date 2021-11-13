@@ -3,6 +3,7 @@ import { filter, get } from 'lodash-es'
 export const state = () => ({
   access_token: null,
   beers: null,
+  wishlist: null,
   filtered: [],
   text: '',
   user: null,
@@ -16,6 +17,12 @@ export const mutations = {
   },
   set_beers(state, beers) {
     state.beers = beers
+  },
+  clear_beers(state) {
+    state.beers = []
+  },
+  set_wishlist(state, wishlist) {
+    state.wishlist = wishlist
   },
   set_filtered(state, filtered) {
     state.filtered = filtered
@@ -88,15 +95,10 @@ export const actions = {
     }
   },
   async getUserBeers({ commit, getters }) {
-    const beers = await getUserList(this.$axios, commit, getters, 'beers')
-    const wishlist = await getUserList(this.$axios, commit, getters, 'wishlist')
-    console.log(beers)
-    console.log(wishlist)
-    const ret =
-      Array.isArray(beers) && Array.isArray(wishlist)
-        ? beers.concat(wishlist)
-        : []
-    return ret
+    return await getUserList(this.$axios, commit, getters, 'beers')
+  },
+  async getUserWishlist({ commit, getters }) {
+    return await getUserList(this.$axios, commit, getters, 'wishlist')
   },
 }
 
