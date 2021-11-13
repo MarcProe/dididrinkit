@@ -55,10 +55,7 @@ export default {
       this.$refs.search.focus()
     },
     sync() {
-      localStorage.removeItem('beers')
-      localStorage.removeItem('wishlist')
-      localStorage.removeItem('user')
-      localStorage.removeItem('meta')
+      localStorage.clear()
       window.location.href = '/authredir'
     },
     sanitizeInput(value) {
