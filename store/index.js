@@ -1,5 +1,3 @@
-import { filter, get } from 'lodash-es'
-
 export const state = () => ({
   access_token: null,
   beers: null,
@@ -86,16 +84,15 @@ export const actions = {
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {
-      let filtered = filter(getters.get_beers, (o) => {
-        return o.slug.includes(text)
-      })
+      let filtered = getters.get_beers.filter((o) => o.slug.includes(text))
+
       commit('set_bshown', filtered.length)
       if (getters.get_wishlist) {
-        const wishfiltered = filter(getters.get_wishlist, (o) => {
-          return o.slug.includes(text)
-        })
-        commit('set_wshown', wishfiltered.length)
-        filtered = wishfiltered.concat(filtered)
+        const wfiltered = getters.get_wishlist.filter((o) =>
+          o.slug.includes(text)
+        )
+        commit('set_wshown', filtered.length)
+        filtered = wfiltered.concat(filtered)
       }
       commit('set_filtered', filtered)
     } else {
@@ -109,7 +106,7 @@ export const actions = {
       e = handle(error)
     })
     if (!e) {
-      commit('set_user', get(res, 'data.response.user'))
+      commit('set_user', res.data.response?.user)
       return { ok: true }
     } else {
       commit('set_error', e)
@@ -138,9 +135,9 @@ async function getUserList(axios, commit, getters, m = 'beers') {
       e = handle(error)
     })
     if (!e) {
-      count += get(res, 'data.response.beers.count')
-      totalcount = get(res, 'data.response.total_count')
-      beers = beers.concat(get(res, 'data.response.beers.items'))
+      count += res.data.response?.beers?.count
+      totalcount = res.data.response?.total_count
+      beers = beers.concat(res.data.response?.beers?.items)
       if (!meta && m === 'beers') {
         meta = res.data.response
         delete meta.beers
@@ -175,13 +172,12 @@ function filterdata(data, m = 'beers') {
 
   data.forEach((e) => {
     const el = {
-      // id: m === 'beers' ? e.first_checkin_id : get(e, 'beer.bid'),
-      id: get(e, 'beer.bid'),
-      beer: get(e, 'beer.beer_name'),
-      label: get(e, 'beer.beer_label'),
-      slug: get(e, 'beer.beer_slug'),
-      brewery: get(e, 'brewery.brewery_name'),
-      score: e.rating_score,
+      id: e?.beer?.bid,
+      beer: e?.beer?.beer_name,
+      label: e?.beer?.beer_label,
+      slug: e?.beer?.beer_slug,
+      brewery: e?.brewery?.brewery_name,
+      score: e?.rating_score,
       list: m,
     }
     retval.push(el)

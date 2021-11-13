@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import { get } from 'lodash-es'
-
 export default {
   data() {
     return {
@@ -53,8 +51,7 @@ export default {
           }
         })
       }
-    } else
-      this.$store.commit('set_bshown', get(this.$store, 'state.beers.length'))
+    } else this.$store.commit('set_bshown', this.$store.state.beers?.length)
 
     if (!this.$store.state.wishlist) {
       this.$store.commit('set_wishlist', [])
@@ -70,11 +67,7 @@ export default {
           }
         })
       }
-    } else
-      this.$store.commit(
-        'set_wshown',
-        get(this.$store, 'state.wishlist.length')
-      )
+    } else this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
   },
 }
 </script>

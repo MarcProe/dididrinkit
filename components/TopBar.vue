@@ -10,9 +10,14 @@
           @input="beerinput"
         />
       </b-col>
-      <b-col cols="3" class="text-center" style="font-size: x-large">
-        <span v-b-tooltip.hover title="checked beers">{{ bshown }}</span
-        >/<span v-b-tooltip.hover title="wishlist">{{ wshown }}</span>
+      <b-col
+        v-b-tooltip.hover
+        title="checked beers / wishlist"
+        cols="3"
+        class="text-center"
+        style="font-size: x-large"
+      >
+        {{ bshown }}/{{ wshown }}
       </b-col>
       <b-col cols="3">
         <b-avatar :src="avatar" fluid button @click="sync" />
@@ -21,9 +26,7 @@
   </b-container>
 </template>
  
- <script>
-import { get } from 'lodash-es'
-
+<script>
 export default {
   data() {
     return {
@@ -33,7 +36,7 @@ export default {
 
   computed: {
     avatar() {
-      return get(this.$store, 'state.user.user_avatar')
+      return this.$store.state.user?.user_avatar
     },
     bshown() {
       return this.$store.state.bshown
