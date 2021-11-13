@@ -32,34 +32,45 @@ export default {
           }
         })
       }
+    }
 
-      if (!this.$store.state.beers) {
-        this.$store.commit('set_beers', [])
-        if (this.$store.state.access_token) {
-          this.$store.dispatch('getUserBeers').then((r) => {
-            if (r.ok) {
-              this.shown = get(this.$store, 'state.beers.length')
-              localStorage.setItem(
-                'beerstimestamp',
-                new Date().toLocaleString()
-              )
-              localStorage.setItem(
-                'beers',
-                JSON.stringify(this.$store.state.beers)
-              )
-              localStorage.setItem(
-                'meta',
-                JSON.stringify(this.$store.state.meta)
-              )
-            } else {
-              window.console.log(this.$store.state.error)
-            }
-          })
-        }
+    if (!this.$store.state.beers) {
+      this.$store.commit('set_beers', [])
+      if (this.$store.state.access_token) {
+        this.$store.dispatch('getUserBeers').then((r) => {
+          if (r.ok) {
+            this.shown = get(this.$store, 'state.beers.length')
+            localStorage.setItem('beerstimestamp', new Date().toLocaleString())
+            localStorage.setItem(
+              'beers',
+              JSON.stringify(this.$store.state.beers)
+            )
+            localStorage.setItem('meta', JSON.stringify(this.$store.state.meta))
+          } else {
+            window.console.log(this.$store.state.error)
+          }
+        })
       }
     } else this.shown = get(this.$store, 'state.beers.length')
-    console.log(get(this.$store, 'state.beers'))
-    console.log(get(this.$store, 'state.wishlist'))
+
+    if (!this.$store.state.wishlist) {
+      this.$store.commit('set_wishlist', [])
+      if (this.$store.state.access_token) {
+        this.$store.dispatch('getUserWishlist').then((r) => {
+          if (r.ok) {
+            // this.shown = get(this.$store, 'state.beers.length')
+            // localStorage.setItem('beerstimestamp', new Date().toLocaleString())
+            localStorage.setItem(
+              'wishlist',
+              JSON.stringify(this.$store.state.wishlist)
+            )
+            // localStorage.setItem('meta', JSON.stringify(this.$store.state.meta))
+          } else {
+            window.console.log(this.$store.state.error)
+          }
+        })
+      }
+    }
   },
 }
 </script>
