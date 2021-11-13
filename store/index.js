@@ -83,6 +83,7 @@ export const actions = {
         const wishfiltered = filter(getters.get_wishlist, (o) => {
           return o.slug.includes(text)
         })
+        console.log(wishfiltered)
         filtered.concat(wishfiltered)
       }
       commit('set_filtered', filtered)
