@@ -75,7 +75,7 @@ export const actions = {
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {
-      const filtered = filter(getters.get_beers, (o) => {
+      let filtered = filter(getters.get_beers, (o) => {
         return o.slug.includes(text)
       })
 
@@ -87,7 +87,7 @@ export const actions = {
         console.log(wishfiltered)
         console.log('f')
         console.log(filtered)
-        filtered.concat(wishfiltered)
+        filtered = filtered.concat(wishfiltered)
         console.log('w')
         console.log(filtered)
       }
