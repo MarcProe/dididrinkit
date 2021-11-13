@@ -129,7 +129,7 @@ async function getUserList(axios, commit, getters, m = 'beers') {
   let totalcount = 999999
   let br = 0
   let e = null
-  while (count < totalcount && br < 5 && !e) {
+  while (count < totalcount && br < 99 && !e) {
     br++
     const res = await axios.get(`${url}&offset=${count}`).catch((error) => {
       e = handle(error)
@@ -171,16 +171,18 @@ function filterdata(data, m = 'beers') {
   const retval = []
 
   data.forEach((e) => {
-    const el = {
-      id: e?.beer?.bid,
-      beer: e?.beer?.beer_name,
-      label: e?.beer?.beer_label,
-      slug: e?.beer?.beer_slug,
-      brewery: e?.brewery?.brewery_name,
-      score: e?.rating_score,
-      list: m,
+    if (e.beer) {
+      const el = {
+        id: e.beer?.bid,
+        beer: e.beer?.beer_name,
+        label: e.beer?.beer_label,
+        slug: e.beer?.beer_slug,
+        brewery: e?.brewery?.brewery_name,
+        score: e?.rating_score,
+        list: m,
+      }
+      retval.push(el)
     }
-    retval.push(el)
   })
 
   return retval
