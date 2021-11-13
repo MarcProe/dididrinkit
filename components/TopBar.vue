@@ -11,7 +11,8 @@
         />
       </b-col>
       <b-col cols="3" class="text-center" style="font-size: x-large">
-        {{ shown }}
+        <span v-b-tooltip.hover title="checked beers">{{ bshown }}</span
+        >/<span v-b-tooltip.hover title="wishlist">{{ wshown }}</span>
       </b-col>
       <b-col cols="3">
         <b-avatar :src="avatar" fluid button @click="sync" />
@@ -34,12 +35,11 @@ export default {
     avatar() {
       return get(this.$store, 'state.user.user_avatar')
     },
-    shown() {
-      return get(this.$store, 'state.filtered.length') > 0
-        ? get(this.$store, 'state.filtered.length')
-        : this.$store.state.beers
-        ? this.$store.state.beers.length
-        : 0
+    bshown() {
+      return this.$store.state.bshown
+    },
+    wshown() {
+      return this.$store.state.wshown
     },
   },
 

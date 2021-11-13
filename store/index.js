@@ -9,6 +9,8 @@ export const state = () => ({
   user: null,
   error: null,
   meta: null,
+  bshown: 0,
+  wshown: 0,
 })
 
 export const mutations = {
@@ -39,6 +41,12 @@ export const mutations = {
   set_meta(state, meta) {
     state.meta = meta
   },
+  set_bshown(state, bshown) {
+    state.bshown = bshown
+  },
+  set_wshown(state, wshown) {
+    state.wshown = wshown
+  },
 }
 
 export const getters = {
@@ -66,8 +74,11 @@ export const getters = {
   get_meta(state) {
     return state.meta
   },
-  get_shown(state) {
-    return get(state, 'filtered.length')
+  get_bshown(state) {
+    return state.bshown
+  },
+  get_wshown(state) {
+    return state.wshown
   },
 }
 
@@ -78,21 +89,15 @@ export const actions = {
       let filtered = filter(getters.get_beers, (o) => {
         return o.slug.includes(text)
       })
-
+      commit('set_bshown', filtered.length)
       if (getters.get_wishlist) {
         const wishfiltered = filter(getters.get_wishlist, (o) => {
           return o.slug.includes(text)
         })
-        console.log('w')
-        console.log(wishfiltered)
-        console.log('f')
-        console.log(filtered)
-        filtered = filtered.concat(wishfiltered)
-        console.log('w')
-        console.log(filtered)
+        commit('set_wshown', wishfiltered.length)
+        filtered = wishfiltered.concat(filtered)
       }
       commit('set_filtered', filtered)
-      // console.log(filtered)
     } else {
       commit('set_filtered', [])
     }

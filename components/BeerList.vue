@@ -24,7 +24,7 @@
         >
           <!-- eslint-disable-next-line vue/no-v-html -->
           <span v-if="b.list === 'beers'" v-html="computeRating(b.score)" />
-          <span v-else>WL</span>
+          <span v-else v-b-tooltip.hover title="Wunschliste">WL</span>
         </b-col>
       </b-row>
     </b-container>
