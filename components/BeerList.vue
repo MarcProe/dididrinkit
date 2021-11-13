@@ -23,7 +23,8 @@
           style="font-size: xx-large"
         >
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-html="computeRating(b.score)" />
+          <span v-if="b.list === 'beers'" v-html="computeRating(b.score)" />
+          <span v-else>WL</span>
         </b-col>
       </b-row>
     </b-container>
