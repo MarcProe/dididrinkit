@@ -51,7 +51,7 @@ export default {
           }
         })
       }
-    } else this.$store.commit('set_bshown', this.$store.state.beers?.length)
+    }
 
     if (!this.$store.state.wishlist) {
       this.$store.commit('set_wishlist', [])
@@ -67,7 +67,9 @@ export default {
           }
         })
       }
-    } else this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
+    }
+    this.$store.commit('set_bshown', this.$store.state.beers?.length)
+    this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
   },
 }
 </script>
