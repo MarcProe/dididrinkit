@@ -46,6 +46,11 @@ export default {
     '@nuxtjs/color-mode',
   ],
 
+  bootstrapVue: {
+    // https://stackoverflow.com/a/62749630/5858875
+    icons: true,
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 

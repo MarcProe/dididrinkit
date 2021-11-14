@@ -5,6 +5,7 @@
         <b-col cols="3">
           <b-img-lazy
             v-b-tooltip.hover
+            class="mb-1"
             fluid
             rounded
             style="max-height: 100px"
