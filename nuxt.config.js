@@ -48,7 +48,7 @@ export default {
 
   bootstrapVue: {
     // https://stackoverflow.com/a/62749630/5858875
-    icons: true,
+    // icons: true,
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
