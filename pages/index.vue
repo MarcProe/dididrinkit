@@ -45,13 +45,14 @@ export default {
               'beers',
               JSON.stringify(this.$store.state.beers)
             )
+            this.$store.commit('set_bshown', this.$store.state.beers?.length)
             localStorage.setItem('meta', JSON.stringify(this.$store.state.meta))
           } else {
             window.console.log(this.$store.state.error)
           }
         })
       }
-    }
+    } else this.$store.commit('set_bshown', this.$store.state.beers?.length)
 
     if (!this.$store.state.wishlist) {
       this.$store.commit('set_wishlist', [])
@@ -62,14 +63,13 @@ export default {
               'wishlist',
               JSON.stringify(this.$store.state.wishlist)
             )
+            this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
           } else {
             window.console.log(this.$store.state.error)
           }
         })
       }
-    }
-    this.$store.commit('set_bshown', this.$store.state.beers?.length)
-    this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
+    } else this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
   },
 }
 </script>
