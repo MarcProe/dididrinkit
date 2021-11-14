@@ -61,6 +61,14 @@ export default {
       short_name: 'DidIDrinkIt?',
       description: 'Check if you already drank a beer, fast.',
       orientation: 'portrait',
+      related_applications: [
+        {
+          platform: 'webapp',
+          url: 'https://untappd.com',
+        },
+      ],
+      background_color: '#0d2538',
+      theme_color: '#0d2538',
     },
   },
 
