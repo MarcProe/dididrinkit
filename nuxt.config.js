@@ -51,11 +51,16 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
-    manifest: {
-      lang: 'en',
-    },
     meta: {
       name: 'Did I Drink It?',
+      description: 'Check if you already drank a beer, fast.',
+    },
+    manifest: {
+      lang: 'en',
+      name: 'Did I Drink It?',
+      short_name: 'DidIDrinkIt?',
+      description: 'Check if you already drank a beer, fast.',
+      orientation: 'portrait',
     },
   },
 
