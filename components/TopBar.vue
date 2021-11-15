@@ -16,9 +16,8 @@
         cols="3"
         class="text-center"
         style="font-size: x-large"
+        >{{ bshown }}/{{ wshown }}</b-col
       >
-        {{ bshown }}/{{ wshown }}
-      </b-col>
       <b-col cols="3">
         <b-avatar :src="avatar" fluid button @click="sync" />
       </b-col>
@@ -64,6 +63,7 @@ export default {
         .replaceAll('ä', 'a')
         .replaceAll('ö', 'o')
         .replaceAll('ü', 'u')
+        .replaceAll(' ', '-')
     },
   },
 }
