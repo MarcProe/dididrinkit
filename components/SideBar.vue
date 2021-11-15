@@ -14,7 +14,7 @@
                 <b-img src="@/static/pbu_40_black.png" fluid center />
               </a>
             </b-col>
-            <b-col cols="2">
+            <b-col cols="2" class="text-right">
               <b-button size="sm" @click="hide">X</b-button>
             </b-col>
           </b-row>
@@ -35,6 +35,3 @@
 <script>
 export default {}
 </script>
-
-<style>
- ;</style>

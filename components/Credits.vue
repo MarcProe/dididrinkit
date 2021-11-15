@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      dismissSecs: 10,
+      dismissSecs: 2,
       dismissCountDown: 0,
     }
   },

@@ -22,7 +22,7 @@
         <b-avatar :src="avatar" fluid button @click="sync" />
       </b-col>
       <b-col cols="2">
-        <IconGear v-b-toggle.sidebar-footer />
+        <IconGear v-b-toggle.sidebar-footer flex style="max-height: 40px" />
       </b-col>
     </b-row>
   </b-container>
