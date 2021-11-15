@@ -13,13 +13,16 @@
       <b-col
         v-b-tooltip.hover
         title="checked beers / wishlist"
-        cols="3"
+        cols="2"
         class="text-center"
         style="font-size: x-large"
         >{{ bshown }}/{{ wshown }}</b-col
       >
-      <b-col cols="3">
+      <b-col cols="2">
         <b-avatar :src="avatar" fluid button @click="sync" />
+      </b-col>
+      <b-col cols="2">
+        <IconGear v-b-toggle.sidebar-footer />
       </b-col>
     </b-row>
   </b-container>

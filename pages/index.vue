@@ -1,8 +1,9 @@
 <template>
   <div>
-    <TopBar />
+    <TopBar id="slider" />
     <BeerList />
     <Credits />
+    <SideBar />
   </div>
 </template>
 
