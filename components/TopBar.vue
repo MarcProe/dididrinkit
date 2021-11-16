@@ -1,13 +1,15 @@
 <template>
-  <b-container>
+  <b-navbar class="mynav" fixed="top" sticky toggleable="lg" type="dark">
     <b-row>
       <b-col cols="6">
         <b-form-input
           ref="search"
           v-model="text"
-          placeholder="Suchbegriff"
+          debounce="500"
+          type="text"
+          placeholder="search"
           :formatter="sanitizeInput"
-          @input="beerinput"
+          @update="beerinput"
         />
       </b-col>
       <b-col
@@ -25,7 +27,7 @@
         <IconGear v-b-toggle.sidebar-footer flex style="max-height: 40px" />
       </b-col>
     </b-row>
-  </b-container>
+  </b-navbar>
 </template>
  
 <script>

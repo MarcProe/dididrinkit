@@ -4,6 +4,7 @@
       <b-row>
         <b-col cols="3">
           <b-img-lazy
+            v-if="b.label"
             v-b-tooltip.hover
             class="mb-1"
             fluid

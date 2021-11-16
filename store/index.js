@@ -94,9 +94,34 @@ export const actions = {
         commit('set_wshown', wfiltered.length)
         filtered = wfiltered.concat(filtered)
       }
+
+      if (filtered.length > 20) {
+        filtered = filtered.slice(0, 20)
+        filtered.push({
+          id: 0,
+          beer: '',
+          label: null,
+          slug: null,
+          brewery: 'showing max 20 beers',
+          score: '',
+          list: 'beers',
+        })
+      }
       commit('set_filtered', filtered)
     } else {
-      commit('set_filtered', [])
+      commit('set_bshown', getters.get_beers?.length)
+      commit('set_wshown', getters.get_wishlist?.length)
+      commit('set_filtered', [
+        {
+          id: 0,
+          beer: '',
+          label: null,
+          slug: null,
+          brewery: 'search for at least 2 letters',
+          score: '',
+          list: 'beers',
+        },
+      ])
     }
   },
   async getUserInfo({ commit, getters }) {

@@ -71,6 +71,7 @@ export default {
         })
       }
     } else this.$store.commit('set_wshown', this.$store.state.wishlist?.length)
+    this.$store.dispatch('filterList')
   },
 }
 </script>
