@@ -15,18 +15,13 @@
     <b-nav-text
       v-b-tooltip.hover
       title="checked beers / wishlist"
-      cols="2"
       class="text-center nav-text"
-      style="
-        font-size: x-large;
-        white-space: nowrap;
-        color: var(--color-primary);
-      "
+      style="font-size: large; white-space: nowrap; color: var(--color-primary)"
     >
       <span v-if="$store.state.usecheckins">{{ bshown }}</span>
-      <span v-if="$store.state.usecheckins && $store.state.usewishlist">
-        /
-      </span>
+      <span v-if="$store.state.usecheckins && $store.state.usewishlist"
+        ><br
+      /></span>
       <span v-if="$store.state.usewishlist">{{ wshown }}</span>
     </b-nav-text>
     <b-avatar :src="avatar" fluid button @click="sync" />
