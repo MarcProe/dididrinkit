@@ -1,18 +1,17 @@
 <template>
   <b-navbar class="mynav" fixed="top" sticky toggleable="lg">
-    <b-nav-form>
-      <b-form-input
-        ref="search"
-        v-model="text"
-        debounce="500"
-        type="text"
-        placeholder="search"
-        :formatter="sanitizeInput"
-        @update="beerinput"
-      />
-    </b-nav-form>
+    <b-form-input
+      ref="search"
+      v-model="text"
+      class="w-50"
+      debounce="500"
+      type="text"
+      placeholder="search"
+      :formatter="sanitizeInput"
+      @update="beerinput"
+    />
 
-    <b-nav-text
+    <div
       v-b-tooltip.hover
       title="checked beers / wishlist"
       class="text-center nav-text"
@@ -23,9 +22,9 @@
         ><br
       /></span>
       <span v-if="$store.state.usewishlist">{{ wshown }}</span>
-    </b-nav-text>
-    <b-avatar :src="avatar" fluid button @click="sync" />
-    <IconGear v-b-toggle.sidebar flex style="max-height: 40px" />
+    </div>
+    <b-avatar :src="avatar" button @click="sync" />
+    <IconGear v-b-toggle.sidebar style="max-height: 40px" />
   </b-navbar>
 </template>
  
