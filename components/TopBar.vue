@@ -1,32 +1,36 @@
 <template>
-  <b-navbar class="mynav" fixed="top" sticky toggleable="lg" type="dark">
-    <b-row>
-      <b-col cols="6">
-        <b-form-input
-          ref="search"
-          v-model="text"
-          debounce="500"
-          type="text"
-          placeholder="search"
-          :formatter="sanitizeInput"
-          @update="beerinput"
-        />
-      </b-col>
-      <b-col
-        v-b-tooltip.hover
-        title="checked beers / wishlist"
-        cols="2"
-        class="text-center"
-        style="font-size: x-large"
-        >{{ bshown }}/{{ wshown }}</b-col
-      >
-      <b-col cols="2">
-        <b-avatar :src="avatar" fluid button @click="sync" />
-      </b-col>
-      <b-col cols="2">
-        <IconGear v-b-toggle.sidebar-footer flex style="max-height: 40px" />
-      </b-col>
-    </b-row>
+  <b-navbar class="mynav" fixed="top" sticky toggleable="lg">
+    <b-nav-form>
+      <b-form-input
+        ref="search"
+        v-model="text"
+        debounce="500"
+        type="text"
+        placeholder="search"
+        :formatter="sanitizeInput"
+        @update="beerinput"
+      />
+    </b-nav-form>
+
+    <b-nav-text
+      v-b-tooltip.hover
+      title="checked beers / wishlist"
+      cols="2"
+      class="text-center nav-text"
+      style="
+        font-size: x-large;
+        white-space: nowrap;
+        color: var(--color-primary);
+      "
+    >
+      <span v-if="$store.state.usecheckins">{{ bshown }}</span>
+      <span v-if="$store.state.usecheckins && $store.state.usewishlist">
+        /
+      </span>
+      <span v-if="$store.state.usewishlist">{{ wshown }}</span>
+    </b-nav-text>
+    <b-avatar :src="avatar" fluid button @click="sync" />
+    <IconGear v-b-toggle.sidebar flex style="max-height: 40px" />
   </b-navbar>
 </template>
  

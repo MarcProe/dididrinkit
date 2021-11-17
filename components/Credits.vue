@@ -10,12 +10,6 @@
     <a href="https://untappd.com" target="_new">
       <b-img src="@/static/pbu_40_black.png" fluid center />
     </a>
-    <b-progress
-      variant="secondary"
-      :max="dismissSecs"
-      :value="dismissCountDown"
-      height="4px"
-    />
   </b-alert>
 </template>
 

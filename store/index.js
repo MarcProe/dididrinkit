@@ -9,6 +9,8 @@ export const state = () => ({
   meta: null,
   bshown: 0,
   wshown: 0,
+  usewishlist: true,
+  usecheckins: true,
 })
 
 export const mutations = {
@@ -45,6 +47,12 @@ export const mutations = {
   set_wshown(state, wshown) {
     state.wshown = wshown
   },
+  set_usewishlist(state, usewishlist) {
+    state.usewishlist = usewishlist === 'true'
+  },
+  set_usecheckins(state, usecheckins) {
+    state.usecheckins = usecheckins === 'true'
+  },
 }
 
 export const getters = {
@@ -78,16 +86,26 @@ export const getters = {
   get_wshown(state) {
     return state.wshown
   },
+  get_usewishlist(state) {
+    return state.usewishlist
+  },
+  get_usecheckins(state) {
+    return state.usecheckins
+  },
 }
 
 export const actions = {
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {
-      let filtered = getters.get_beers.filter((o) => o.slug.includes(text))
+      let filtered = []
 
-      commit('set_bshown', filtered.length)
-      if (getters.get_wishlist) {
+      if (getters.get_usecheckins) {
+        filtered = getters.get_beers.filter((o) => o.slug.includes(text))
+        commit('set_bshown', filtered.length)
+      }
+
+      if (getters.get_wishlist && getters.get_usewishlist) {
         const wfiltered = getters.get_wishlist.filter((o) =>
           o.slug.includes(text)
         )

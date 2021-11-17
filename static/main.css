@@ -36,3 +36,13 @@ a {
 .mynav {
   background-color: var(--bg);
 }
+
+.b-sidebar-body,
+.sidebarfooter {
+  background-color: var(--bg-secondary);
+  color: var(--color-primary);
+}
+
+.custom-control-label {
+  font-size: x-large;
+}
