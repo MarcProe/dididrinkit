@@ -16,7 +16,11 @@
           />
         </b-col>
         <b-col>
-          <b-row class="" style="font-size: x-large"> {{ b.beer }} </b-row>
+          <a :href="`https://untappd.com/b/${b.slug}/${b.id}`">
+            <b-row class="" style="font-size: x-large">
+              {{ b.beer }}
+            </b-row>
+          </a>
           <b-row class="font-weight-bold">{{ b.brewery }} </b-row>
         </b-col>
         <b-col
