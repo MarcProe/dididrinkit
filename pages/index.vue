@@ -23,7 +23,7 @@ export default {
     )
     this.$store.commit('set_user', JSON.parse(localStorage.getItem('user')))
     this.$store.commit('set_meta', JSON.parse(localStorage.getItem('meta')))
-    this.$store.commit('set_token', JSON.parse(localStorage.getItem('token')))
+    // this.$store.commit('set_token', JSON.parse(localStorage.getItem('token')))
 
     if (!this.$store.state.user) {
       if (this.$store.state.access_token) {
