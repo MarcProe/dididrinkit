@@ -16,11 +16,18 @@
           />
         </b-col>
         <b-col>
-          <a :href="`https://untappd.com/b/${b.slug}/${b.id}`">
-            <b-row class="" style="font-size: x-large">
+          <!--
+          <b-row class="" style="font-size: x-large">
+            <NuxtLink :to="{ name: 'details', params: { bid: b.id } }">
               {{ b.beer }}
-            </b-row>
-          </a>
+            </NuxtLink>
+          </b-row>
+          -->
+          <b-row class="" style="font-size: x-large">
+            <a :href="`https://untappd.com/b/${b.slug}/${b.id}`">
+              {{ b.beer }}
+            </a>
+          </b-row>
           <b-row class="font-weight-bold">{{ b.brewery }} </b-row>
         </b-col>
         <b-col

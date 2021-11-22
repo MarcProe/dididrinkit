@@ -95,6 +95,9 @@ export const getters = {
 }
 
 export const actions = {
+  async get_beer({ getters }, bid) {
+    return await getters.get_beers.find((b) => b.id === bid)
+  },
   filterList({ commit, getters }) {
     const text = getters.get_text
     if (text.length > 1) {

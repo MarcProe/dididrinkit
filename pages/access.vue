@@ -10,6 +10,7 @@
 export default {
   created() {
     this.$store.commit('set_token', this.$route.query.access)
+    localStorage.setItem('token', this.$route.query.access)
     this.$router.push('/')
   },
 }
