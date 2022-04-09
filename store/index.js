@@ -168,7 +168,7 @@ export const actions = {
 }
 
 async function getUserList(axios, commit, getters, m = 'beers') {
-  const url = `https://api.untappd.com/v4/user/${m}/?access_token=${getters.get_access_token}&limit=50`
+  const url = `https://api.untappd.com/v4/user/${m}/?access_token=${getters.get_access_token}&limit=50&sort=highest_rated`
   let beers = []
   let meta = null
   let count = 0
