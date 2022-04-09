@@ -46,6 +46,16 @@
           @input="toggle_usecheckins"
           >Show Check-Ins</b-form-checkbox
         >
+        <b-form-checkbox
+          id="checkbox-3"
+          v-model="showglobal"
+          name="checkbox-3"
+          size="lg"
+          value="true"
+          unchecked-value="false"
+          @input="toggle_showglobal"
+          >Show Global Rating</b-form-checkbox
+        >
       </div>
     </b-sidebar>
   </div>
@@ -57,6 +67,7 @@ export default {
     return {
       usewishlist: true,
       usecheckins: true,
+      showglobal: true,
     }
   },
   methods: {
@@ -67,6 +78,10 @@ export default {
     toggle_usecheckins(val) {
       this.$store.commit('set_usecheckins', val)
       this.$store.dispatch('filterList')
+    },
+    toggle_showglobal(val) {
+      this.$store.commit('set_showglobal', val)
+      this.$store.dispatch('filterlist')
     },
   },
 }

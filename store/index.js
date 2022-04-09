@@ -11,6 +11,7 @@ export const state = () => ({
   wshown: 0,
   usewishlist: true,
   usecheckins: true,
+  showglobal: true,
 })
 
 export const mutations = {
@@ -53,6 +54,9 @@ export const mutations = {
   set_usecheckins(state, usecheckins) {
     state.usecheckins = usecheckins === 'true'
   },
+  set_showglobal(state, showglobal) {
+    state.showglobal = showglobal === 'true'
+  },
 }
 
 export const getters = {
@@ -91,6 +95,9 @@ export const getters = {
   },
   get_usecheckins(state) {
     return state.usecheckins
+  },
+  get_showglobal(state) {
+    return state.showglobal
   },
 }
 

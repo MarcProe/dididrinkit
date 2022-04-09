@@ -45,6 +45,7 @@
           <span v-else v-b-tooltip.hover title="Wishlist">WL</span>
           <br />
           <span
+            v-if="$store.state.showglobal"
             v-b-tooltip.hover
             title="Global Rating"
             style="font-size: x-large; color: #999"
