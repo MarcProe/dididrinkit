@@ -38,6 +38,7 @@
           <!-- eslint-disable-next-line vue/no-v-html -->
           <span v-if="b.list === 'beers'" v-html="computeRating(b.score)" />
           <span v-else v-b-tooltip.hover title="Wunschliste">WL</span>
+          <span v-html="computeGlobal(b.global)" />
         </b-col>
       </b-row>
     </b-container>
@@ -61,6 +62,13 @@ export default {
     computeRating(r) {
       if (r) {
         return `${Math.floor(r)}<sup>${this.fracs[r % 1]}</sup>`
+      } else {
+        return ''
+      }
+    },
+    computeGlobal(r) {
+      if (r) {
+        return `${Math.floor(r * 10) / 10}`
       } else {
         return ''
       }
