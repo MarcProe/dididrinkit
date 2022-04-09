@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <b-list-group id="beerlist">
     <b-container v-for="b in $store.state.filtered" :key="b.id" fluid>
@@ -35,10 +36,20 @@
           cols="2"
           style="font-size: xx-large"
         >
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-if="b.list === 'beers'" v-html="computeRating(b.score)" />
-          <span v-else v-b-tooltip.hover title="Wunschliste">WL</span>
-          <span v-html="computeGlobal(b.global)" />
+          <span
+            v-if="b.list === 'beers'"
+            v-b-tooltip.hover
+            title="Your Rating"
+            v-html="computeRating(b.score)"
+          />
+          <span v-else v-b-tooltip.hover title="Wishlist">WL</span>
+          <br />
+          <span
+            v-b-tooltip.hover
+            title="Global Rating"
+            style="font-size: x-large; color: #999"
+            v-html="computeGlobal(b.global)"
+          />
         </b-col>
       </b-row>
     </b-container>
@@ -68,7 +79,9 @@ export default {
     },
     computeGlobal(r) {
       if (r) {
-        return `${Math.floor(r * 10) / 10}`
+        return `${Math.floor(r)}<sup><small><b>${(Math.floor(r * 100) / 100)
+          .toString()
+          .substring(2)}</b></small></sup>`
       } else {
         return ''
       }
