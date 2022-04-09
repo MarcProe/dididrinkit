@@ -226,6 +226,7 @@ function filterdata(data, m = 'beers') {
         slug: e.beer?.beer_slug,
         brewery: e?.brewery?.brewery_name,
         score: e?.rating_score,
+        score_global: e.beer?.rating_score,
         list: m,
       }
       retval.push(el)
