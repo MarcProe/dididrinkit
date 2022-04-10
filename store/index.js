@@ -191,7 +191,7 @@ async function getUserList(axios, commit, getters, m = 'beers') {
       count += res.data.response?.beers?.count
       totalcount = res.data.response?.total_count
       beers = beers.concat(res.data.response?.beers?.items)
-      commit(`${m.charAt(0)}shown`, beers.length)
+      commit(`set_${m.charAt(0)}shown`, beers.length)
       if (!meta && m === 'beers') {
         meta = res.data.response
         delete meta.beers
