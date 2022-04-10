@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { get } from 'https'
 // eslint-disable-next-line node/no-deprecated-api
 import { parse } from 'url'
@@ -17,7 +18,7 @@ export default {
 
     get(url, (resp) => {
       let body = ''
-
+      console.log(url)
       resp.on('data', (chunk) => {
         body += chunk
       })
@@ -33,16 +34,16 @@ export default {
             res.end()
           } else {
             // TODO: redirect to error page
-            window.console.error(json)
+            console.error(json)
           }
         } catch (error) {
           // TODO: redirect to error page
-          window.console.error(error.message)
+          console.error(error.message)
         }
       })
     }).on('error', (error) => {
       // TODO: redirect to error page
-      window.console.error(error.message)
+      console.error(error.message)
     })
   },
 }
