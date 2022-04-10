@@ -18,7 +18,7 @@ export default {
 
     get(url, (resp) => {
       let body = ''
-      console.log(url)
+
       resp.on('data', (chunk) => {
         body += chunk
       })
