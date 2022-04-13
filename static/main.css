@@ -46,3 +46,8 @@ a {
 .custom-control-label {
   font-size: x-large;
 }
+
+.modal-content {
+  background-color: var(--bg);
+  color: var(--color-primary);
+}

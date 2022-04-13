@@ -18,9 +18,7 @@
       style="font-size: large; white-space: nowrap; color: var(--color-primary)"
     >
       <span v-if="$store.state.usecheckins">{{ bshown }}</span>
-      <span v-if="$store.state.usecheckins && $store.state.usewishlist"
-        ><br
-      /></span>
+      <span v-if="$store.state.usecheckins && $store.state.usewishlist"><br /></span>
       <span v-if="$store.state.usewishlist">{{ wshown }}</span>
     </div>
     <b-avatar :src="avatar" button @click="sync" />
@@ -58,15 +56,11 @@ export default {
     },
     sync() {
       localStorage.clear()
+      localStorage.setItem('settings', JSON.stringify(this.$store.getters.get_settings))
       window.location.href = '/authredir'
     },
     sanitizeInput(value) {
-      return value
-        .toLowerCase()
-        .replaceAll('ä', 'a')
-        .replaceAll('ö', 'o')
-        .replaceAll('ü', 'u')
-        .replaceAll(' ', '-')
+      return value.toLowerCase().replaceAll('ä', 'a').replaceAll('ö', 'o').replaceAll('ü', 'u').replaceAll(' ', '-')
     },
   },
 }

@@ -1,16 +1,8 @@
 <template>
   <div>
-    <b-sidebar
-      id="sidebar"
-      class="sidebar"
-      aria-label="Sidebar"
-      no-header
-      shadow
-    >
+    <b-sidebar id="sidebar" class="sidebar" aria-label="Sidebar" no-header shadow @hidden="hidden">
       <template #footer="{ hide }">
-        <div
-          class="d-flex text-light align-items-center px-3 py-2 sidebarfooter"
-        >
+        <div class="d-flex text-light align-items-center px-3 py-2 sidebarfooter">
           <b-container>
             <b-row>
               <b-col cols="10">
@@ -33,7 +25,6 @@
           size="lg"
           value="true"
           unchecked-value="false"
-          @input="toggle_usewishlist"
           >Show Wishlist</b-form-checkbox
         >
         <b-form-checkbox
@@ -43,7 +34,6 @@
           size="lg"
           value="true"
           unchecked-value="false"
-          @input="toggle_usecheckins"
           >Show Check-Ins</b-form-checkbox
         >
         <b-form-checkbox
@@ -53,7 +43,6 @@
           size="lg"
           value="true"
           unchecked-value="false"
-          @input="toggle_showglobal"
           >Show Global Rating</b-form-checkbox
         >
       </div>
@@ -64,24 +53,39 @@
 <script>
 export default {
   data() {
-    return {
-      usewishlist: true,
-      usecheckins: true,
-      showglobal: true,
-    }
+    return {}
+  },
+  computed: {
+    usewishlist: {
+      get() {
+        return this.$store.getters.get_usewishlist ?? true
+      },
+      set(val) {
+        this.$store.commit('set_usewishlist', val)
+        this.$store.dispatch('filterList')
+      },
+    },
+    usecheckins: {
+      get() {
+        return this.$store.getters.get_usecheckins
+      },
+      set(val) {
+        this.$store.commit('set_usecheckins', val)
+        this.$store.dispatch('filterList')
+      },
+    },
+    showglobal: {
+      get() {
+        return this.$store.getters.get_showglobal
+      },
+      set(val) {
+        this.$store.commit('set_showglobal', val)
+      },
+    },
   },
   methods: {
-    toggle_usewishlist(val) {
-      this.$store.commit('set_usewishlist', val)
-      this.$store.dispatch('filterList')
-    },
-    toggle_usecheckins(val) {
-      this.$store.commit('set_usecheckins', val)
-      this.$store.dispatch('filterList')
-    },
-    toggle_showglobal(val) {
-      this.$store.commit('set_showglobal', val)
-      this.$store.dispatch('filterlist')
+    hidden() {
+      localStorage.setItem('settings', JSON.stringify(this.$store.getters.get_settings))
     },
   },
 }

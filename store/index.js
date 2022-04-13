@@ -48,6 +48,11 @@ export const mutations = {
   set_wshown(state, wshown) {
     state.wshown = wshown
   },
+  set_settings(state, settings) {
+    state.usewishlist = settings?.usewishlist ?? true
+    state.usecheckins = settings?.usecheckins ?? true
+    state.showglobal = settings?.showglobal ?? true
+  },
   set_usewishlist(state, usewishlist) {
     state.usewishlist = usewishlist === 'true'
   },
@@ -90,6 +95,13 @@ export const getters = {
   get_wshown(state) {
     return state.wshown
   },
+  get_settings(state) {
+    return {
+      usewishlist: state?.usewishlist,
+      usecheckins: state?.usecheckins,
+      showglobal: state?.showglobal,
+    }
+  },
   get_usewishlist(state) {
     return state.usewishlist
   },
@@ -116,9 +128,7 @@ export const actions = {
       }
 
       if (getters.get_wishlist && getters.get_usewishlist) {
-        const wfiltered = getters.get_wishlist.filter((o) =>
-          o.slug.includes(text)
-        )
+        const wfiltered = getters.get_wishlist.filter((o) => o.slug.includes(text))
         commit('set_wshown', wfiltered.length)
         filtered = wfiltered.concat(filtered)
       }
@@ -157,12 +167,12 @@ export const actions = {
     let e = null
     const res = await this.$axios.get(url).catch((error) => {
       e = handle(error)
+      commit('set_error', e)
     })
     if (!e) {
       commit('set_user', res.data.response?.user)
       return { ok: true }
     } else {
-      commit('set_error', e)
       return { ok: false }
     }
   },
@@ -213,6 +223,8 @@ function handle(error) {
   const e = {}
   if (error.response) {
     e.response = error.response
+    e.code = error.response?.data?.meta?.code
+    e.message = error.response?.data?.meta?.error_detail
   } else if (error.request) {
     e.request = error.request
   } else {
