@@ -180,8 +180,9 @@ export const actions = {
     return await getUserList(this.$axios, commit, getters, 'beers')
   },
   async getUserWishlist({ commit, getters }) {
-    const wlist = await getUserList(this.$axios, commit, getters, 'wishlist').map((e) => {
-      e.id = 'wl' + e.id // beers drank and on wishlist have the same id, we need to add a unique key to thee wishlist-id
+    const wlist = await getUserList(this.$axios, commit, getters, 'wishlist')
+    const wlistm = wlist.map((e) => {
+      e.id = 'wl' + e.id // beers drank and on wishlist have the same id, we need to add a unique key to the wishlist-id
       return e
     })
     return wlist
