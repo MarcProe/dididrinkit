@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import CreditsItem from '~/components/CreditsItem.vue'
 function modalError(that) {
   const modalOptions = {
     title: 'Error ' + that.$store.state.error.code,
@@ -85,6 +84,5 @@ export default {
       this.$store.commit("set_wshown", this.$store.state.wishlist?.length);
     this.$store.dispatch("filterList");
   },
-  components: { CreditsItem }
 }
 </script>

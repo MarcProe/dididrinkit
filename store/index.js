@@ -235,7 +235,7 @@ function handle(error) {
 
 function filterdata(data, m = 'beers') {
   const retval = []
-  const n = m[0] //ids need to be unique, so we add a char as a prefix
+  const n = m[0] // ids need to be unique, so we add a char as a prefix
   data.forEach((e) => {
     if (e.beer) {
       const el = {
