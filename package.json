@@ -43,7 +43,7 @@
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/stylelint-module": "^4.1.0",
-    "@types/lodash-es": "^4.17.5",
+    "@types/lodash-es": "^4.17.6",
     "chromedriver": "^105.0.1",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
