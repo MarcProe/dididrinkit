@@ -180,14 +180,7 @@ export const actions = {
     return await getUserList(this.$axios, commit, getters, 'beers')
   },
   async getUserWishlist({ commit, getters }) {
-    const wlist = await getUserList(this.$axios, commit, getters, 'wishlist')
-    console.log(wlist)
-    const wlistm = wlist.map((e) => {
-      e.id = 'wl' + e.id // beers drank and on wishlist have the same id, we need to add a unique key to the wishlist-id
-      return e
-    })
-    console.log(wlist)
-    return wlist
+    return await getUserList(this.$axios, commit, getters, 'wishlist')
   },
 }
 
@@ -242,11 +235,11 @@ function handle(error) {
 
 function filterdata(data, m = 'beers') {
   const retval = []
-
+  const n = m[0] //ids need to be unique, so we add a char as a prefix
   data.forEach((e) => {
     if (e.beer) {
       const el = {
-        id: e.beer?.bid,
+        id: n + e.beer?.bid,
         beer: e.beer?.beer_name,
         label: e.beer?.beer_label,
         slug: e.beer?.beer_slug,
