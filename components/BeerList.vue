@@ -25,7 +25,7 @@
           </b-row>
           -->
           <b-row class="" style="font-size: x-large">
-            <a :href="`https://untappd.com/b/${b.slug}/${b.id}`">
+            <a :href="`https://untappd.com/b/${b.slug}/${b.id.substring(1)}`">
               {{ b.beer }}
             </a>
           </b-row>
