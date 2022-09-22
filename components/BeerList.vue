@@ -4,17 +4,9 @@
     <b-container v-for="b in $store.state.filtered" :key="b.id" fluid>
       <b-row>
         <b-col cols="3">
-          <b-img-lazy
-            v-if="b.label"
-            v-b-tooltip.hover
-            class="mb-1"
-            fluid
-            rounded
-            style="max-height: 100px"
-            :alt="b.beer"
-            :src="b.label"
-            :title="b.slug"
-          />
+          <b-img-lazy 
+            v-if="b.label" v-b-tooltip.hover class="mb-1" fluid rounded style="max-height: 100px"
+            :alt="b.beer" :src="b.label" :title="b.slug" />
         </b-col>
         <b-col>
           <!--
@@ -25,32 +17,19 @@
           </b-row>
           -->
           <b-row class="" style="font-size: x-large">
-            <a :href="`https://untappd.com/b/${b.slug}/${b.id.substring(1)}`">
+            <a :href="generateBeerLink(b)">
               {{ b.beer }}
             </a>
           </b-row>
           <b-row class="font-weight-bold">{{ b.brewery }} </b-row>
         </b-col>
-        <b-col
-          class="text-center font-weight-bold"
-          cols="2"
-          style="font-size: xx-large"
-        >
-          <span
-            v-if="b.list === 'beers'"
-            v-b-tooltip.hover
-            title="Your Rating"
-            v-html="computeRating(b.score)"
-          />
+        <b-col class="text-center font-weight-bold" cols="2" style="font-size: xx-large">
+          <span v-if="b.list === 'beers'" v-b-tooltip.hover title="Your Rating" v-html="computeRating(b.score)" />
           <span v-else v-b-tooltip.hover title="Wishlist">WL</span>
           <br />
-          <span
-            v-if="$store.state.showglobal"
-            v-b-tooltip.hover
-            title="Global Rating"
-            style="font-size: x-large; color: #999"
-            v-html="computeGlobal(b.global)"
-          />
+          <span 
+            v-if="$store.state.showglobal" v-b-tooltip.hover title="Global Rating"
+            style="font-size: x-large; color: #999" v-html="computeGlobal(b.global)" />
         </b-col>
       </b-row>
     </b-container>
@@ -87,6 +66,13 @@ export default {
         return ''
       }
     },
+    generateBeerLink(b) {
+      if (b.id && b.id.substring(1)) {
+        return `https://untappd.com/b/${b.slug}/${b.id.substring(1)}`;
+      } else {
+        return `https://untappd.com`;
+      }
+    }
   },
 }
 </script>
