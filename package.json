@@ -17,7 +17,7 @@
     "fuck_modules": "rm -rf node_modules && rm -f package-lock.json && npm i"
   },
   "engines": {
-    "node": "v22.x"
+    "node": "v20.x"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
